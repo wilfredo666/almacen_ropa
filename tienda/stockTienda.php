@@ -40,8 +40,9 @@ include "../conexion.php";
                                 <th>Categoria</th>
                                 <th>Talla</th>
                                 <th>Precio</th>
-                                <th style="width: 40px">Color</th>
-                                <td><button onclick="nuevoProducto();" type="button" class="btn btn-primary">Nuevo</button></td>
+                                <th>Color</th>
+                                <th>Stock</th>
+                                <td><button onclick="nuevoIngInventario(<?php echo $tienda_detalle[0];?>);" type="button" class="btn btn-primary">Nuevo</button></td>
                             </tr>
                         </thead>
                         <tbody id="res_bus_producto" class="res_bus_producto">
@@ -49,21 +50,23 @@ include "../conexion.php";
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
                             $inicio=($_GET["pagina"]-1)*10;
-                            $res=mysqli_query($conectador,"SELECT * FROM `producto`");
+                            $res=mysqli_query($conectador,"SELECT descripcion, categoria, talla, precio, color, stock FROM stock_tienda
+JOIN producto
+ON stock_tienda.id_producto=producto.id_producto where id_tienda=$tienda_detalle[0]");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
                             <tr>
-                                <td><?php echo " $f[1] ";?></td>
-                                <td><?php echo " $f[2] ";?></td>
-                                <td><?php echo " $f[3] ";?></td>
-                                <td><?php echo " $f[4] ";?></td>
-                                <td><?php echo " $f[5] ";?></td>
+                               
+                                <td><?php echo  $f[0] ;?></td>
+                                <td> <?php echo $f[1] ;?></td>
+                                <td><?php echo  $f[2] ;?></td>
+                                <td><?php echo  $f[3] ;?></td>
+                                <td><?php echo  $f[4] ;?></td>
+                                <td><?php echo  $f[5] ;?></td>
                                 <td>
                                     <div class="btn-group">
                                         <button onclick="VerProducto(<?php echo $f[0]; ?>);" class="btn btn-info btn-circle"><i class="fas fa-eye"></i></button>
-                                        <button onclick="MEditProducto(<?php echo $f[0]; ?>);" class="btn btn-secondary btn-circle"><i class="fas fa-edit"></i></button>
-                                        <button onclick="MEliProducto(<?php echo $f[0]; ?>);" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>

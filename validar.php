@@ -17,8 +17,10 @@ $filas=mysqli_fetch_row($resultado);
 if($filas>0){
     if($filas[3]=="administrador"){
         header("Location:panel_inicial.php");
+        $_SESSION["id_usuario"]=$filas[0];
     }elseif($filas[3]=="cajero"){
         header("Location:panel_inicial_tienda.php");
+        $_SESSION["id_usuario"]=$filas[0];
     }
 }
 else{

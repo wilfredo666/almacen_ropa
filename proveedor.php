@@ -1,5 +1,6 @@
 <script src="assets/js/proveedor.js"></script>
 <?php
+session_start();
 include "panel_control.php";
 include "conexion.php";
 ?>

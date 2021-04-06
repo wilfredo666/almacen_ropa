@@ -1,4 +1,6 @@
 <?php
+include "conexion.php";
+
 //ruta
 $ruta=$_SERVER['REQUEST_URI'];
 //dominio
@@ -7,6 +9,14 @@ $dominio=$_SERVER['HTTP_HOST'];
 $carpeta_sistema=explode("/",$ruta);
 $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
 
+//detalles de tienda
+$id_usuario=$_SESSION['id_usuario'];
+$tienda=mysqli_query($conectador,"SELECT * FROM tienda WHERE id_usuario=$id_usuario");
+$tienda_detalle=mysqli_fetch_row($tienda);
+
+//detalles de usuario
+$usuario=mysqli_query($conectador,"SELECT * FROM usuario WHERE id_usuario=$id_usuario");
+$usuario_detalle=mysqli_fetch_row($usuario);
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +83,8 @@ $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="info">
-                            <a class="d-block">Tienda</a>
+                            <a class="d-block">Tienda - <?php echo $tienda_detalle[1];?></a>
+                            <a class="d-block">Encargado: <?php echo $usuario_detalle[4]." ".$usuario_detalle[5]." ".$usuario_detalle[6];?></a>
                         </div>
                     </div>
 
@@ -112,15 +123,15 @@ $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
-                                <a href="reportes.php" class="nav-link">
-                                    <i class="nav-icon fas fa-chart-bar"></i>
-                                    <p>
-                                        Reportes
-                                        <span class="right badge badge-danger">1</span>
-                                    </p>
-                                </a>
-                            </li>
+                            <!--                            <li class="nav-item">
+<a href="reportes.php" class="nav-link">
+<i class="nav-icon fas fa-chart-bar"></i>
+<p>
+Reportes
+<span class="right badge badge-danger">1</span>
+</p>
+</a>
+</li>-->
                             <li class="nav-item">
                                 <a href="salir.php" class="nav-link">
                                     <i class="nav-icon fas fa-door-open"></i>

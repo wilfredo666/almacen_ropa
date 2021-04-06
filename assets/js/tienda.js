@@ -205,35 +205,6 @@ function infoDestino(){
     )
 }
 
-/*registrar ingreso - funcion*/
-function RegIngreso(){
-    var formData = new FormData($("#form_ingreso_tienda")[0]);
-
-    $.ajax({
-        url:host+"tienda/RegIngreso.php",
-        type:"POST",
-        data:formData,
-        cache:false,
-        contentType:false,
-        processData:false,
-        success:function(data)
-        {
-            $("#mensaje_cont").html("<center class='alert alert-success' style='width:350px;'>tienda ingresado con exito!!!</center>");
-
-
-            setTimeout(
-                function(){
-                    location.reload();
-                },1000);
-            document.getElementById('costo_pro').value="";
-            document.getElementById('costo_tot_pro').value="";
-            document.getElementById('cantidad_pro').value="";
-        }
-
-    }
-          )
-}
-
 /*registrar salida - funcion*/
 function RegSalida(){
     var formData = new FormData($("#form_salida_tienda")[0]);
@@ -292,3 +263,61 @@ function consultar(){
           )
 }
 
+/* formulario para agregar inventario a tienda*/
+function nuevoIngInventario(id_tienda){
+    $('#modal_cont').modal('show');
+    var obj="";
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"FormIngProTienda.php?id_tienda="+id_tienda,
+            data:obj,
+            success:function(data){
+                $("#formulario").html(data);
+            }
+        }
+    )
+}
+
+/*registrar ingreso de inventario a tienda - funcion*/
+function RegIngreso(id_tienda){
+    var formData = new FormData($("#form_ingreso_producto")[0]);
+
+    $.ajax({
+        url:host+"RegIngProTienda.php?id_tienda="+id_tienda,
+        type:"POST",
+        data:formData,
+        cache:false,
+        contentType:false,
+        processData:false,
+        success:function(data)
+        {
+            $("#mensaje_cont").html("<center class='alert alert-success' style='width:350px;'>Producto ingresado con exito!!!</center>");
+
+
+            setTimeout(
+                function(){
+                    location.reload();
+                },1000);
+
+        }
+
+    }
+          )
+}
+
+/*informacion del producto escrito en "IngresoProductoTienda"*/
+function infoProducto(){
+    var txt_bus=$("#producto").val();
+    var obj={txt_bus:txt_bus};
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"IngInfoProducto.php",
+            data:obj,
+            success:function(data){
+                $("#info_producto").html(data);
+            }
+        }
+    )
+}

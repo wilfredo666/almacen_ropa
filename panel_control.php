@@ -1,4 +1,6 @@
 <?php
+include "conexion.php";
+
 //ruta
 $ruta=$_SERVER['REQUEST_URI'];
 //dominio
@@ -6,6 +8,15 @@ $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
 $carpeta_sistema=explode("/",$ruta);
 $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
+
+//detalles de tienda
+$id_usuario=$_SESSION['id_usuario'];
+$tienda=mysqli_query($conectador,"SELECT * FROM tienda WHERE id_usuario=$id_usuario");
+$tienda_detalle=mysqli_fetch_row($tienda);
+
+//detalles de usuario
+$usuario=mysqli_query($conectador,"SELECT * FROM usuario WHERE id_usuario=$id_usuario");
+$usuario_detalle=mysqli_fetch_row($usuario);
 ?>
 <!DOCTYPE html>
 <html>
@@ -72,7 +83,8 @@ $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="info">
-                            <a class="d-block">Control de Inventario</a>
+                            <a class="d-block">Panel de Administracion</a>
+                            <a class="d-block">Usuario: <?php echo $usuario_detalle[4]." ".$usuario_detalle[5]." ".$usuario_detalle[6];?></a>
                         </div>
                     </div>
 
@@ -136,12 +148,6 @@ $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
                                             <p>Lista de almacenes</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="traspaso.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Traspasar a tienda</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">
@@ -167,7 +173,7 @@ $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
                                     </li>
                                 </ul>
                             </li>
-                            <li class="nav-item">
+<!--                            <li class="nav-item">
                                 <a href="reportes.php" class="nav-link">
                                     <i class="nav-icon fas fa-chart-bar"></i>
                                     <p>
@@ -175,7 +181,7 @@ $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
                                         <span class="right badge badge-danger">1</span>
                                     </p>
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="nav-item">
                                 <a href="salir.php" class="nav-link">
                                     <i class="nav-icon fas fa-door-open"></i>

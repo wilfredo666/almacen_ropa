@@ -53,3 +53,48 @@ FROM stock_almacen
 JOIN producto
 ON producto.id_producto=stock_almacen.id_producto
 WHERE id_almacen=2
+
+
+-----
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th rowspan="2">Color</th>
+                                <th colspan="3">Talla</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4">jeans</td>
+                                <td></td>
+                                <td>Xl</td>
+                                <td>S</td>
+                                <td>L</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Violeta</td>
+                                <td>5</td>
+                                <td></td>
+                                <td>15</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>Marron</td>
+                                <td></td>
+                                <td>30</td>
+                                <td>10</td>
+                                <td>40</td>
+                            </tr>
+                            <tr>
+                                <td>Azul</td>
+                                <td>40</td>
+                                <td></td>
+                                <td>30</td>
+                                <td>70</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
