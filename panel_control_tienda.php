@@ -8,7 +8,7 @@ $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
 $carpeta_sistema=explode("/",$ruta);
 $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
-
+//hola
 //detalles de tienda
 $id_usuario=$_SESSION['id_usuario'];
 $tienda=mysqli_query($conectador,"SELECT * FROM tienda WHERE id_usuario=$id_usuario");
