@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Almacen de ropa</title>
+
+        <link href="bootstrap-4.0.0/dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+
+        <script src="bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
+        <link rel="stylesheet" href="assets/css/index.css">
+        <link rel="stylesheet" href="assets/css/estilos_index.css">
+    </head>
+    <body>
+
+        <form action="validar.php" method="post">
+            <h2>ALMACENES</h2>
+            <input type="text" placeholder="&#128590;Usuario" name="usuario">
+            <input type="password" placeholder="&#128273;Password" name="clave">
+            <select name="categoria" id="">
+                <option>Seleccionar</option>
+                <option value="administrador">Administrador</option>
+                <option value="cajero">Cajero</option>
+            </select>
+            <input type="submit" value="Acceder">
+        </form>
+    </body>
+</html>
+

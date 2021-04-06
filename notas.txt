@@ -1,0 +1,55 @@
+dominio y cpanel:
+https://marketingonlineoficial.com/
+https://marketingonlineoficial.com/cpanel
+user: marketingonlineo
+password: orlGstc2pzZU
+
+---ftp---
+servidor: ftp.marketingonlineoficial.com
+usuario: administrador@marketingonlineoficial.com
+password: Admin123!
+puerto: 21
+
+base de datos:
+marketin_almacen_ropa
+usuario base de datos:
+marketin_sistemaalmacen
+Admin123!
+host base de datos:
+localhost:3306
+
+
+consultas:
+-modo 1 para unir datos:
+SELECT desc_almacen, descripcion, talla, stock FROM stock_almacen st, producto pt, almacen al WHERE pt.id_producto=st.id_producto and al.id_almacen=st.id_almacen AND al.id_almacen=4
+
+-------------
+El color en la ropa debe poder ingresarse manualmente
+	-Contra: puede darse el caso de que inserten el mismo color con errores de letras, entonces el sistema lo consideraria color distinto
+	-Pro: no habra necesidad de actualizar la lista de colores
+
+/* con esto extraemos todos los datos de todos los productos correspondientes a solo un almacen en concreto*/
+ $res=mysqli_query($conectador,"SELECT id_producto, descripcion, categoria, talla, precio, color FROM producto
+                        WHERE id_producto
+                        in (SELECT DISTINCT id_producto FROM `ingreso_almacen` WHERE `id_almacen`=$id_almacen) ");
+
+/*obtener datos relacionados*/
+
+forma 1)
+SELECT descripcion, categoria, talla, precio, stock
+FROM producto pt, stock_almacen sta
+WHERE pt.id_producto=2 AND sta.id_almacen=2
+
+forma 2)
+SELECT producto.id_producto, descripcion, categoria, talla, precio, stock
+FROM stock_almacen
+JOIN producto
+ON producto.id_producto=stock_almacen.id_producto
+WHERE id_almacen=2
+
+forma 3)
+SELECT *
+FROM stock_almacen
+JOIN producto
+ON producto.id_producto=stock_almacen.id_producto
+WHERE id_almacen=2
