@@ -17,7 +17,7 @@ marketin_sistemaalmacen
 Admin123!
 host base de datos:
 localhost:3306
-
+$conexion=mysqli_connect("localhost:3306","marketin_sistemaalmacen","Admin123!","marketin_almacen_ropa");
 
 consultas:
 -modo 1 para unir datos:
