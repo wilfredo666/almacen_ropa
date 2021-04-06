@@ -22,7 +22,7 @@ include "conexion.php";
                             </tr>
                         </thead>
                         <tbody>
-
+<!--colocar el usuario a cargo-->
                             <?php
                             $res=mysqli_query($conectador,"SELECT id_almacen,direccion,nombre,apellido_pat,apellido_mat,desc_almacen FROM `almacen` JOIN usuario ON almacen.id_usuario=usuario.id_usuario ");
                             while($f=mysqli_fetch_array($res))
