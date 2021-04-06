@@ -147,7 +147,7 @@ $usuario_detalle=mysqli_fetch_row($usuario);
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>Lista de almacenes</p>
                                         </a>
-                                    </li>
+                                    </li>    
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview">

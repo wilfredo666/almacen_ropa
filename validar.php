@@ -4,7 +4,8 @@ session_start();
 $usuario=$_POST['usuario'];
 $clave=$_POST['clave'];
 $cat=$_POST['categoria'];
-$conexion=mysqli_connect("localhost","root","","almacen_ropa");
+/*$conexion=mysqli_connect("localhost","root","","almacen_ropa");*/
+$conexion=mysqli_connect("localhost:3306","marketin_sistemaalmacen","Admin123!","marketin_almacen_ropa");
 
 $_SESSION["usuario"]=$usuario;
 $_SESSION["clave"]=$clave;
