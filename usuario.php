@@ -1,8 +1,8 @@
-<script src="assets/js/usuario.js"></script>
 <?php
 session_start();
 include "panel_control.php";
 ?>
+<script src="assets/js/usuario.js"></script>
 <div class="content-wrapper">
 
     <!-- contenido principal -->

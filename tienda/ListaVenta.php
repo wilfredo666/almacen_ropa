@@ -1,4 +1,3 @@
-<script src="../assets/js/tienda.js"></script>
 <?php
 session_start();
 if($_SESSION["categoria"]=="administrador"){
@@ -9,6 +8,7 @@ if($_SESSION["categoria"]=="administrador"){
 include "../conexion.php";
 
 ?>
+<script src="../assets/js/tienda.js"></script>
 <div class="content-wrapper">
 
     <!-- contenido principal -->

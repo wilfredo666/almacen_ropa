@@ -11,6 +11,9 @@ password: Admin123!
 puerto: 21
 path:/public_html/sistema_almacen
 
+---git---
+https://github.com/wilfredo666/almacen_ropa.git
+
 base de datos:
 marketin_almacen_ropa
 usuario base de datos:
