@@ -9,6 +9,7 @@ include "panel_control.php";
 include "conexion.php";
 ?>
 <!--recursos extras-->
+
 <?php
 include "footer.php";
 ?>

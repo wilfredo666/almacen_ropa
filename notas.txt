@@ -9,6 +9,7 @@ servidor: ftp.marketingonlineoficial.com
 usuario: administrador@marketingonlineoficial.com
 password: Admin123!
 puerto: 21
+path:/public_html/sistema_almacen
 
 base de datos:
 marketin_almacen_ropa
@@ -22,6 +23,10 @@ $conexion=mysqli_connect("localhost:3306","marketin_sistemaalmacen","Admin123!",
 consultas:
 -modo 1 para unir datos:
 SELECT desc_almacen, descripcion, talla, stock FROM stock_almacen st, producto pt, almacen al WHERE pt.id_producto=st.id_producto and al.id_almacen=st.id_almacen AND al.id_almacen=4
+
+**************
+cuando no inicia en hosting con la vista adecuada css, entonces quiza es por al peticion http --> htpps
+**************
 
 -------------
 El color en la ropa debe poder ingresarse manualmente

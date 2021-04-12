@@ -1,10 +1,10 @@
-<script src="assets/js/producto.js"></script>
 <?php
 session_start();
 include "panel_control.php";
 include "conexion.php";
 
 ?>
+<script src="assets/js/producto.js"></script>
 <div class="content-wrapper">
 
     <!-- contenido principal -->

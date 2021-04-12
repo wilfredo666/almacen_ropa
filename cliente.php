@@ -1,15 +1,13 @@
-<script src="assets/js/cliente.js"></script>
 <?php
 session_start();
-
 if($_SESSION["categoria"]=="administrador"){
     include "panel_control.php";
 }else{
     include "panel_control_tienda.php";
 }
-
 include "conexion.php";
 ?>
+<script src="assets/js/cliente.js"></script>
 <div class="content-wrapper">
 
     <!-- contenido principal -->

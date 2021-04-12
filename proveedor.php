@@ -1,9 +1,9 @@
-<script src="assets/js/proveedor.js"></script>
 <?php
 session_start();
 include "panel_control.php";
 include "conexion.php";
 ?>
+<script src="assets/js/proveedor.js"></script>
 <div class="content-wrapper">
 
     <!-- contenido principal -->
