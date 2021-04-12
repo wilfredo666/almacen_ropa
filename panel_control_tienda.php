@@ -8,7 +8,7 @@ $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
 $carpeta_sistema=explode("/",$ruta);
 $ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
-//hola
+
 //detalles de tienda
 $id_usuario=$_SESSION['id_usuario'];
 $tienda=mysqli_query($conectador,"SELECT * FROM tienda WHERE id_usuario=$id_usuario");
@@ -17,6 +17,7 @@ $tienda_detalle=mysqli_fetch_row($tienda);
 //detalles de usuario
 $usuario=mysqli_query($conectador,"SELECT * FROM usuario WHERE id_usuario=$id_usuario");
 $usuario_detalle=mysqli_fetch_row($usuario);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -116,9 +117,15 @@ $usuario_detalle=mysqli_fetch_row($usuario);
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="<?php echo $ruta_absoluta;?>/venta.php" class="nav-link">
+                                        <a href="<?php echo $ruta_absoluta;?>/tienda/FormRegVenta.php" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Ventas</p>
+                                            <p>Realizar venta</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?php echo $ruta_absoluta;?>/tienda/ListaVenta.php?pagina=1" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Registro de ventas</p>
                                         </a>
                                     </li>
                                 </ul>

@@ -1,6 +1,7 @@
 <script src="assets/js/cliente.js"></script>
 <?php
 session_start();
+
 if($_SESSION["categoria"]=="administrador"){
     include "panel_control.php";
 }else{

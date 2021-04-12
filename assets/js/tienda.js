@@ -4,6 +4,7 @@ function getAbsolutePath() {
     var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
     return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
 }
+//devuelve la ruta de donde se ente ejecutando el archivo que lo esta llamando
 host=getAbsolutePath();
 
 /*modal formulario nueva tienda*/
@@ -320,4 +321,107 @@ function infoProducto(){
             }
         }
     )
+}
+
+/*informacion del producto escrito - lado izquierdo en "FormRegVenta"*/
+function infoProductoTienda(id_tienda){
+    var txt_bus=$("#producto").val();
+    var obj={txt_bus:txt_bus};
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"IngInfoProductoTienda.php?id_tienda="+id_tienda,
+            data:obj,
+            success:function(data){
+                $("#info_producto").html(data);
+            }
+        }
+    )
+}
+
+/*agregar item a lista de ventas - lado derecho en "FormRegVenta" */
+var i=0;
+function AgregarCarrito(){
+    var id_stock=$("#id_stock").val();
+    var obj={id_stock:id_stock,
+            i:i};
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"AgregarCarrito.php",
+            data:obj,
+            success:function(data){
+                $("#carrito").append(data);
+                i=i+1;
+            }
+        }
+    )
+}
+
+/*calculo de el importe total en venta*/
+function TotImporte(e){
+    var CostoUni=$("#precio_pro"+e).val();
+    var CantidadPro=$("#cantidad_pro"+e).val();
+    var ImpTotal=parseFloat(CostoUni)*parseFloat(CantidadPro);
+        $("#importe"+e).val(ImpTotal);
+    total(i);
+}
+
+/*Calculo del total de venta*/
+function total(c){
+    var n;
+    var tot=0;
+    for(n=0;n<c;n++){
+        tot=tot+parseFloat($("#importe"+n).val());
+    }
+    document.getElementById("total").innerHTML= tot.toFixed(2);
+    $("#totalInp").val(tot.toFixed(2));
+}
+
+/**/
+function FinVenta(id_tienda){
+    var formData = new FormData($("#form_venta")[0]);
+
+    $.ajax({
+        url:host+"RegVenta.php?id_tienda="+id_tienda,
+        type:"POST",
+        data:formData,
+        cache:false,
+        contentType:false,
+        processData:false,
+        success:function(data)
+        {
+            $("#mensaje_cont").html("<center class='alert alert-success' style='width:350px;'>Venta registrada!!!</center>");
+
+            setTimeout(
+                function(){
+                    location.reload();
+                },1000);
+
+        }
+
+    }
+          )
+}
+
+/*quitar item de la venta*/
+function QuitarItem(tr){
+    $('#fila'+tr).remove();
+    i=i-1;
+    total(i);
+}
+
+/*ver el detalla de la venta en "ListaVenta"*/
+function VerDetalleVenta(id_venta){
+    $('#modal_cont').modal('show');
+    console.log(host);
+    var obj="";
+    $.ajax({
+         type:"POST",
+            url:host+"VerDetalleVenta.php?id_venta="+id_venta,
+            data:obj,
+            success:function(data){
+                $("#formulario").html(data);
+    }
+    })
 }

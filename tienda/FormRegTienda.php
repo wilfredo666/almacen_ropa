@@ -13,7 +13,7 @@
                 <option>Seleccionar</option>
                 <?php
                 include "../conexion.php";
-                $usu_sql=mysqli_query($conectador,"select * from usuario");
+                $usu_sql=mysqli_query($conectador,"select * from usuario WHERE not exists (select id_usuario from tienda WHERE usuario.id_usuario=tienda.id_usuario)");
                 while($u=mysqli_fetch_array($usu_sql))
                 {
                     echo "<option value=".$u[0].">$u[4] $u[5] $u[6]</option>";

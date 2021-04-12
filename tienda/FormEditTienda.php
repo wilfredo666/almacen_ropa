@@ -19,15 +19,14 @@ $f=mysqli_fetch_array($res);
             <select class="form-control" name="usuario" id="usuario">                
                 <?php
                 include "../conexion.php";
-                $usu_sql=mysqli_query($conectador,"select * from usuario");
-                while($u=mysqli_fetch_array($usu_sql))
+                $usu_diponible=mysqli_query($conectador,"select * from usuario WHERE not exists (select id_usuario from tienda WHERE usuario.id_usuario=tienda.id_usuario)");
+                   
+                $usu_act=mysqli_fetch_row(mysqli_query($conectador,"select * from usuario where id_usuario=$f[3]"));
+                   echo "<option value=".$u[0]." selected>$usu_act[4] $usu_act[5] $usu_act[6]</option>";
+                while($u=mysqli_fetch_array($usu_diponible))
                 {
-                    if($u[0]==$f[3]){
-                        echo "<option value=".$u[0]." selected>$u[4] $u[5] $u[6]</option>";
-                    }else{
+
                         echo "<option value=".$u[0].">$u[4] $u[5] $u[6]</option>";
-                    }
-                    
                 }
                 ?>
             </select>

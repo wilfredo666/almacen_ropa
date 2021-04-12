@@ -98,3 +98,30 @@ WHERE id_almacen=2
                         </tbody>
                     </table>
                     <br>
+                    
+/*agregar item a lista de ventas - lado derecho en "FormRegVenta" */
+var lista=[];
+function AgregarCarrito(){
+    var id_stock=$("#id_stock").val();
+    lista.push(id_stock);
+    var obj={lista:lista};
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"AgregarCarrito.php",
+            data:obj,
+            success:function(data){
+                $("#carrito").html(data);
+               /* tambien pueden funcionar con .append y enviando solo el id y no un arreglo con los id*/
+            }
+        }
+    )
+}
+
+/*calculo de el importe total en venta*/
+function TotImporte(){
+    var CostoUni=$("#precio_pro").val();
+    var CantidadPro=$("#cantidad_pro").val();
+    var ImpTotal=parseFloat(CostoUni)*parseFloat(CantidadPro);
+        $("#importe").val(ImpTotal);
+}

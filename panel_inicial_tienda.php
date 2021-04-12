@@ -5,9 +5,9 @@ if($_SESSION["categoria"]==null || $_SESSION["categoria"]==""){
     echo "Usted no ha iniciado sesion";
     die();
 }
-
-include "panel_control_tienda.php";
 include "conexion.php";
+include "panel_control_tienda.php";
+
 ?>
 <?php
 include "footer.php";
