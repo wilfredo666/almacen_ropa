@@ -4,6 +4,11 @@ https://marketingonlineoficial.com/cpanel
 user: marketingonlineo
 password: orlGstc2pzZU
 
+acceso a sistema
+usuario: admin
+pass: password
+categoria: administrador
+
 ---ftp---
 servidor: ftp.marketingonlineoficial.com
 usuario: administrador@marketingonlineoficial.com
