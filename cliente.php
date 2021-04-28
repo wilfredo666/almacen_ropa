@@ -65,6 +65,41 @@ include "conexion.php";
                             ?>
                         </tbody>
                     </table>
+                    <br>
+                     <!--paginacion-->
+                     <?php
+                    //obtener el total de filas
+                    $sql=mysqli_query($conectador,"select count(*) as total from cliente");
+                    $totalRegistros=mysqli_fetch_array($sql);
+
+                    $itemsPorPagina=10;
+                    $total=ceil($totalRegistros[0]/$itemsPorPagina);
+                    ?>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item <?php echo $_GET["pagina"]<=1 ? "disabled" : " "?>">
+                                <a class="page-link" href="cliente.php?pagina=<?php echo $_GET['pagina']-1;?>" aria-label="Anterior">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <?php for($i=0; $i<$total; $i++)
+{
+                            ?>
+                            <li class="page-item <?php echo $_GET['pagina']==$i+1 ? "active": ""?>"><a class="page-link" href="cliente.php?pagina=<?php echo $i+1;?>">
+                                <?php echo $i+1;?>
+                                </a>
+                            </li>
+                            <?php
+}
+                            ?>
+                            <li class="page-item <?php echo $_GET["pagina"]>=$total ? "disabled" : " "?>">
+                                <a class="page-link" href="cliente.php?pagina=<?php echo $_GET['pagina']+1;?>" aria-label="Siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--final paginacion-->
                 </div>
             </div>
         </div>
