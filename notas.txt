@@ -2,7 +2,7 @@ dominio y cpanel:
 https://marketingonlineoficial.com/
 https://marketingonlineoficial.com/cpanel
 user: marketingonlineo
-password: orlGstc2pzZU
+password: orIGstc2pzZU
 
 acceso a sistema
 usuario: admin
