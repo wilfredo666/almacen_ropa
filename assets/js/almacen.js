@@ -4,7 +4,7 @@ function getAbsolutePath() {
     var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
     return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
 }
-var host=getAbsolutePath();
+var host=getAbsolutePath();/*devuleve la ruta de donde se ejecuta el boton*/
 
 /*modal formulario nuevo Almacen*/
 function nuevoAlmacen(){
@@ -309,6 +309,22 @@ function nuevoIngreso(id_almacen){
     )
 }
 
+/*modal - formulario para eliminar ingreso*/
+function FormEliIngreso(id_ingreso){
+    $('#modal_cont_sm').modal('show');
+    var obj="";
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"FormEliIngreso.php?id_ingreso="+id_ingreso,
+            data:obj,
+            success:function(data){
+                $("#formulario_sm").html(data);
+            }
+        }
+    )
+}
+
 /*Eliminar registro de ingreso - funcion*/
 function EliIngreso(id_ingreso){
     var obj="";
@@ -319,6 +335,7 @@ function EliIngreso(id_ingreso){
             data:obj,
             success:function(data)
             {
+                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>Ingreso eliminado!!!</center>");
                 setTimeout(
                     function(){
                         location.reload();
@@ -328,9 +345,25 @@ function EliIngreso(id_ingreso){
     )
 }
 
+/*modal - formulario eliminar Traspaso*/
+function FormEliTraspaso(id_traspaso){
+    $('#modal_cont_sm').modal('show');
+    var obj="";
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"FormEliTraspaso.php?id_traspaso="+id_traspaso,
+            data:obj,
+            success:function(data){
+                $("#formulario_sm").html(data);
+            }
+        }
+    )
+}
+
 /*Eliminar registro de traspaso a otro almacen - funcion*/
 function EliTraspaso(id_traspaso){
-     var obj="";
+    var obj="";
     $.ajax(
         {
             type:"POST",
@@ -338,6 +371,7 @@ function EliTraspaso(id_traspaso){
             data:obj,
             success:function(data)
             {
+                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>Traspaso eliminado!!!</center>");
                 setTimeout(
                     function(){
                         location.reload();
@@ -365,7 +399,7 @@ function nuevoTraspaso(id_almacen){
 
 /*informacion de los producto que el almacen contiene para modal "formRegTrasAlmacen" - "formRegTrasTeinda" */
 function infoProductoTraspaso(id_almacen){
-     var txt_bus=$("#producto").val();
+    var txt_bus=$("#producto").val();
     var obj={txt_bus:txt_bus};
     $.ajax(
         {
@@ -381,7 +415,7 @@ function infoProductoTraspaso(id_almacen){
 
 /*busqueda de producto en "TraspasoAlmacen"*/
 function buscarTraspaso(id_almacen){
-     var txt_bus=$("#txt_bus_traspaso").val();
+    var txt_bus=$("#txt_bus_traspaso").val();
     var obj={txt_bus:txt_bus};
     $.ajax(
         {
@@ -397,7 +431,7 @@ function buscarTraspaso(id_almacen){
 
 /*registro de nuevo traspaso a otro almacen - accion*/
 function RegTraspaso(id_almacen){
-     var formData = new FormData($("#form_traspaso_almacen")[0]);
+    var formData = new FormData($("#form_traspaso_almacen")[0]);
 
     $.ajax({
         url:host+"RegTraspasoAlmacen.php?id_almacen="+id_almacen,
@@ -418,12 +452,12 @@ function RegTraspaso(id_almacen){
 
     }
           )
-    
+
 }
 
 /*modal para registro de nuevo traspaso a tienda*/
 function nuevoTraspasoTienda(id_almacen){
-     $('#modal_cont').modal('show');
+    $('#modal_cont').modal('show');
     var obj="";
     $.ajax(
         {
@@ -439,7 +473,7 @@ function nuevoTraspasoTienda(id_almacen){
 
 /*registro de nuevo traspaso a tienda - accion*/
 function RegTraspasoTienda(id_almacen){
-     var formData = new FormData($("#form_traspaso_tienda")[0]);
+    var formData = new FormData($("#form_traspaso_tienda")[0]);
 
     $.ajax({
         url:host+"RegTraspasoTienda.php?id_almacen="+id_almacen,
@@ -460,5 +494,20 @@ function RegTraspasoTienda(id_almacen){
 
     }
           )
-    
+}
+
+/* vista detallada de producto - modal */
+function VerProducto(producto,id_almacen){
+    $('#modal_fs').modal('show');
+    var obj="";
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"VistaDetalladaPro.php?producto="+producto+"&id_almacen="+id_almacen,
+            data:obj,
+            success:function(data){
+                $("#formulario_fs").html(data);
+            }
+        }
+    )
 }

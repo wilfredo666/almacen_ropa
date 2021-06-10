@@ -6,13 +6,13 @@
         </div>
         <div class="col">
            <label>Que tipo de ropa almacena?:</label>
-            <select name="descripcion" id="descripcion" class="form-control">
-                <option>Seleccionar</option>
-                <option>Pantalones jeans</option>
-                <option>Poleras</option>
-                <option>Chamarras</option>
-                <option>Ropa infantil</option>
-                <option>Mangas sport</option>
+           <input type="text" class="form-control" name="descripcion" id="descripcion">
+            <label>Que tallas/medidas usara?:</label>
+            <select name="medida" id="medida" class="form-control">
+               <option>Seleccionar</option>
+                <option value="1">2-16</option>
+                <option value="2">P-XXXL</option>
+                <option value="3">36-54</option>
             </select>
         </div>
         <div class="col">

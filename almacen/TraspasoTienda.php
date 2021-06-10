@@ -16,7 +16,7 @@ $id_almacen=$_GET["id_almacen"];
 
                     <div class="row">
                         <div class="col-4">
-                            <h4>Traspaso a tienda</h4>
+                            <h4>Traspasos a tiendas</h4>
                         </div>
                         <div class="col-6">
                             <div class="input-group">

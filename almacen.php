@@ -1,12 +1,10 @@
-<script src="assets/js/almacen.js"></script>
 <?php
 session_start();
 include "panel_control.php";
 include "conexion.php";
-
 ?>
 <div class="content-wrapper">
-
+<script src="assets/js/almacen.js"></script>
     <!-- contenido principal -->
     <section class="content">
         <div class="container-fluid">

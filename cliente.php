@@ -44,7 +44,9 @@ include "conexion.php";
                         <tbody id="res_bus_cliente">
 
                             <?php
-                            $res=mysqli_query($conectador,"SELECT * FROM cliente");
+                            //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
+                            $inicio=($_GET["pagina"]-1)*10;
+                            $res=mysqli_query($conectador,"SELECT * FROM cliente limit $inicio,10");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
@@ -66,8 +68,8 @@ include "conexion.php";
                         </tbody>
                     </table>
                     <br>
-                     <!--paginacion-->
-                     <?php
+                    <!--paginacion-->
+                    <?php
                     //obtener el total de filas
                     $sql=mysqli_query($conectador,"select count(*) as total from cliente");
                     $totalRegistros=mysqli_fetch_array($sql);

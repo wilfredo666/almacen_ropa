@@ -4,8 +4,8 @@ session_start();
 $usuario=$_POST['usuario'];
 $clave=$_POST['clave'];
 $cat=$_POST['categoria'];
-$conexion=mysqli_connect("localhost","root","","almacen_ropa");
-/*$conexion=mysqli_connect("localhost:3306","marketin_sistemaalmacen","Admin123!","marketin_almacen_ropa");*/
+/*$conexion=mysqli_connect("localhost","root","","almacen_ropa");*/
+$conexion=mysqli_connect("localhost:3306","marketin_sistemaalmacen","Admin123!","marketin_almacen_ropa");
 
 
 $consulta="select * from usuario where nombre_usu='$usuario' and password='$clave' and categoria='$cat'";

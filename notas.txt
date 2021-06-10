@@ -16,6 +16,11 @@ password: Admin123!
 puerto: 21
 path:/public_html/sistema_almacen
 
+
+/////// al subir en la nube /////
+cambiar a https en "panel_control.php" y "panel_control_tienda.php"
+cambiar la conexion a la bd en "validar.php" y "conexion.php"
+
 ---git---
 https://github.com/wilfredo666/almacen_ropa.git
 
@@ -36,10 +41,16 @@ SELECT desc_almacen, descripcion, talla, stock FROM stock_almacen st, producto p
 cuando no inicia en hosting con la vista adecuada css, entonces quiza es por al peticion http --> htpps
 **************
 
--------------
-El color en la ropa debe poder ingresarse manualmente
-	-Contra: puede darse el caso de que inserten el mismo color con errores de letras, entonces el sistema lo consideraria color distinto
-	-Pro: no habra necesidad de actualizar la lista de colores
+--------***----
+Pendientes:
+mejorar lo de las tallas
+incorporar buscador a stockAlmacen.php
+- poner carrito en productos para agregar color, talla
+- para probar hacer registro de todas tallas, y colores
+- definir solo minisculas al registrar producto (color, descripcion)
+- sumar todos los que tengan la misma talla para la vista simple
+
+--------***----
 
 /* con esto extraemos todos los datos de todos los productos correspondientes a solo un almacen en concreto*/
  $res=mysqli_query($conectador,"SELECT id_producto, descripcion, categoria, talla, precio, color FROM producto
@@ -47,7 +58,6 @@ El color en la ropa debe poder ingresarse manualmente
                         in (SELECT DISTINCT id_producto FROM `ingreso_almacen` WHERE `id_almacen`=$id_almacen) ");
 
 /*obtener datos relacionados*/
-
 forma 1)
 SELECT descripcion, categoria, talla, precio, stock
 FROM producto pt, stock_almacen sta
@@ -67,50 +77,6 @@ JOIN producto
 ON producto.id_producto=stock_almacen.id_producto
 WHERE id_almacen=2
 
-
------
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th rowspan="2">Color</th>
-                                <th colspan="3">Talla</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td rowspan="4">jeans</td>
-                                <td></td>
-                                <td>Xl</td>
-                                <td>S</td>
-                                <td>L</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Violeta</td>
-                                <td>5</td>
-                                <td></td>
-                                <td>15</td>
-                                <td>20</td>
-                            </tr>
-                            <tr>
-                                <td>Marron</td>
-                                <td></td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>40</td>
-                            </tr>
-                            <tr>
-                                <td>Azul</td>
-                                <td>40</td>
-                                <td></td>
-                                <td>30</td>
-                                <td>70</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <br>
                     
 /*agregar item a lista de ventas - lado derecho en "FormRegVenta" */
 var lista=[];
@@ -138,3 +104,25 @@ function TotImporte(){
     var ImpTotal=parseFloat(CostoUni)*parseFloat(CantidadPro);
         $("#importe").val(ImpTotal);
 }
+
+------
+Soluciones a vista detallada
+opcion 1)
+1.- en registro de producto, agregar la opcion para elejir en que tallas estara disponible
+2.- Crear alguna validacion para que no pueda agregarse en otro almacen que no maneje esas tallas
+3.- Regsitrar dicho producto con todas sus tallas
+4.- Agregar stock 0 en todas las tallas de manera inicial
+
+opcion2)
+SELECT descripcion, talla, precio, color, stock FROM producto
+JOIN stock_almacen
+ON producto.id_producto=stock_almacen.id_producto
+ORDER BY talla
+------
+consultas:
+-----evitar datos repetidos----
+SELECT DISTINCT talla from producto
+---sacar datos de dado un almacen---
+SELECT descripcion, talla, precio, color, stock FROM producto JOIN stock_almacen ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=2
+---extraer solo las tallas de dado un almacen---
+SELECT DISTINCT talla FROM producto JOIN stock_almacen ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=2

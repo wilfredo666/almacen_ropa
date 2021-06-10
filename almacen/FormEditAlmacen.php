@@ -17,15 +17,7 @@ $u_id=mysqli_fetch_array($usu_sql_id);
         </div>
         <div class="col">
             <label>Que tipo de ropa almacena?:</label>
-            <select name="descripcion" id="descripcion" class="form-control">
-                <option><?php echo $f[3];?></option>
-                <option>--Seleccionar--</option>
-                <option>Pantalones jeans</option>
-                <option>Poleras</option>
-                <option>Chamarras</option>
-                <option>Ropa infantil</option>
-                <option>Mangas sport</option>
-            </select>
+             <input type="text" class="form-control" name="descripcion" id="descripcion" value="<?php echo $f[3];?>">
         </div>
         <div class="col">
             <label>Persona a cargo:</label>

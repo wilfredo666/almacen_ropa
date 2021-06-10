@@ -7,7 +7,7 @@ $ruta=$_SERVER['REQUEST_URI'];
 $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
 $carpeta_sistema=explode("/",$ruta);
-$ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
+$ruta_absoluta="https://".$dominio."/".$carpeta_sistema[1];
 
 //detalles de tienda
 $id_usuario=$_SESSION['id_usuario'];

@@ -44,17 +44,17 @@ include "conexion.php";
 
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
-                            $inicio=($_GET["pagina"]-1)*10;
-                            $res=mysqli_query($conectador,"SELECT * FROM `producto`");
+                            $inicio=($_GET["pagina"]-1)*10;//devuelve 0
+                            $res=mysqli_query($conectador,"SELECT * FROM producto limit $inicio,10");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
                             <tr>
-                                <td><?php echo " $f[1] ";?></td>
-                                <td><?php echo " $f[2] ";?></td>
-                                <td><?php echo " $f[3] ";?></td>
-                                <td><?php echo " $f[4] ";?></td>
-                                <td><?php echo " $f[5] ";?></td>
+                                <td><?php echo $f[1];?></td>
+                                <td><?php echo $f[2];?></td>
+                                <td><?php echo $f[3];?></td>
+                                <td><?php echo $f[4];?></td>
+                                <td><?php echo $f[5];?></td>
                                 <td>
                                     <div class="btn-group">
                                         <button onclick="VerProducto(<?php echo $f[0]; ?>);" class="btn btn-info btn-circle"><i class="fas fa-eye"></i></button>
@@ -73,21 +73,22 @@ include "conexion.php";
                     <?php
                     //obtener el total de filas
                     $sql=mysqli_query($conectador,"select count(*) as total from producto");
-                    $totalRegistros=mysqli_fetch_array($sql);
+                    $totalRegistros=mysqli_fetch_row($sql);//devuelve 21
 
                     $productosPorPagina=10;
-                    $total=ceil($totalRegistros[0]/$productosPorPagina);
-                    //var_dump($resultado);
+                    $total=ceil($totalRegistros[0]/$productosPorPagina);//devuelve 2,1 redondeado a 3
 
 
                     ?>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
+                            <!-- simbolo << -->
                             <li class="page-item <?php echo $_GET["pagina"]<=1 ? "disabled" : " "?>">
                                 <a class="page-link" href="producto.php?pagina=<?php echo $_GET['pagina']-1;?>" aria-label="Anterior">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
+                            <!-- fin simbolo << -->
                             <?php for($i=0; $i<$total; $i++)
 {
                             ?>

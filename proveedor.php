@@ -40,7 +40,9 @@ include "conexion.php";
                         <tbody id="res_bus_proveedor">
 
                             <?php
-                            $res=mysqli_query($conectador,"SELECT * FROM proveedor;");
+                            //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
+                            $inicio=($_GET["pagina"]-1)*10;//devuelve 0
+                            $res=mysqli_query($conectador,"SELECT * FROM proveedor limit $inicio,10");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>

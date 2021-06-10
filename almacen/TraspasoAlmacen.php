@@ -16,7 +16,7 @@ $id_almacen=$_GET["id_almacen"];
 
                     <div class="row">
                         <div class="col-4">
-                            <h4>Traspaso almacen</h4>
+                            <h4>Traspasos a otros almacenes</h4>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
@@ -66,7 +66,7 @@ WHERE id_almacen_origen=$id_almacen");
                                 <td><?php echo  $f[6] ;?></td>
                                 <td>
                                     <div class="btn-group">
-                                        <button onclick="EliTraspaso(<?php echo $f[0]; ?>);" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button>
+                                        <button onclick="FormEliTraspaso(<?php echo $f[0]; ?>);" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
