@@ -93,9 +93,6 @@ function EliAlmacen(id){
            }
           )
 }
-function prueba(){
-    alert(host);
-}
 
 /*Modal editar Almacen*/
 function MEditAlmacen(id){

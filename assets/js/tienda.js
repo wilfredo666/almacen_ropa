@@ -264,7 +264,7 @@ function consultar(){
           )
 }
 
-/* formulario para agregar inventario a tienda*/
+/* formulario para agregar inventario a tienda desde tienda*/
 function nuevoIngInventario(id_tienda){
     $('#modal_cont').modal('show');
     var obj="";
@@ -424,4 +424,20 @@ function VerDetalleVenta(id_venta){
                 $("#formulario").html(data);
     }
     })
+}
+
+/* vista detallada de producto - modal */
+function DetalleProducto(producto,id_tienda){
+    $('#modal_fs').modal('show');
+    var obj="";
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"VistaDetalladaPro.php?producto="+producto+"&id_tienda="+id_tienda,
+            data:obj,
+            success:function(data){
+                $("#formulario_fs").html(data);
+            }
+        }
+    )
 }

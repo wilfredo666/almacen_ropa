@@ -55,12 +55,12 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
                         <tbody>
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
-                            $inicio=($_GET["pagina"]-1)*10;
+                            $inicio=($_GET["pagina"]-1)*50;
 
-                            //colocando su cantidad correspondiente a cada talla
+                            //colocando su cantidad correspondiente a cada talla para vista simple
 
                             //1.- extrayendo todos los productos
-                            $productos_sql=mysqli_query($conectador,"SELECT DISTINCT descripcion FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen");
+                            $productos_sql=mysqli_query($conectador,"SELECT DISTINCT descripcion FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen limit $inicio,50");
                             while($productos=mysqli_fetch_array($productos_sql))
                             {
                             ?>
@@ -112,14 +112,14 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item <?php echo $_GET["pagina"]<=1 ? "disabled" : " "?>">
-                                <a class="page-link" href="stockAlmacen.php?pagina=<?php echo $_GET['pagina']+1;?>" aria-label="Anterior">
+                                <a class="page-link" href="stockAlmacen.php?id_almacen=<?php echo $id_almacen; ?>&pagina=<?php echo $_GET['pagina']+1;?>" aria-label="Anterior">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <?php for($i=0; $i<$total; $i++)
 {
                             ?>
-                            <li class="page-item <?php echo $_GET['pagina']==$i+1 ? "active": ""?>"><a class="page-link" href="stockAlmacen.php?pagina=<?php echo $i+1;?>">
+                            <li class="page-item <?php echo $_GET['pagina']==$i+1 ? "active": ""?>"><a class="page-link" href="stockAlmacen.php?id_almacen=<?php echo $id_almacen; ?>&pagina=<?php echo $i+1;?>">
                                 <?php echo $i+1;?>
                                 </a>
                             </li>
@@ -127,7 +127,7 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
 }
                             ?>
                             <li class="page-item <?php echo $_GET["pagina"]>=$total ? "disabled" : " "?>">
-                                <a class="page-link" href="stockAlmacen.php?pagina=<?php echo $_GET['pagina']+1;?>" aria-label="Siguiente">
+                                <a class="page-link" href="stockAlmacen.php?id_almacen=<?php echo $id_almacen; ?>&pagina=<?php echo $_GET['pagina']+1;?>" aria-label="Siguiente">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>

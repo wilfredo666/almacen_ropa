@@ -10,6 +10,7 @@ include "../conexion.php";
 ?>
 <script src="../assets/js/tienda.js"></script>
 <div class="content-wrapper">
+    
 
     <!-- contenido principal -->
     <section class="content">

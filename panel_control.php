@@ -7,7 +7,7 @@ $ruta=$_SERVER['REQUEST_URI'];
 $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
 $carpeta_sistema=explode("/",$ruta);
-$ruta_absoluta="https://".$dominio."/".$carpeta_sistema[1];
+$ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
 
 //detalles de tienda
 $id_usuario=$_SESSION['id_usuario'];
@@ -162,12 +162,6 @@ $tienda_detalle=mysqli_fetch_row($tienda);
                                             <p>Lista de tiendas</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="test.php" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>test</p>
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
 <!--                            <li class="nav-item">
@@ -180,7 +174,7 @@ $tienda_detalle=mysqli_fetch_row($tienda);
                                 </a>
                             </li>-->
                             <li class="nav-item">
-                                <a href="salir.php" class="nav-link">
+                                <a href="<?php echo $ruta_absoluta;?>/salir.php" class="nav-link">
                                     <i class="nav-icon fas fa-door-open"></i>
                                     <p>
                                         Salir

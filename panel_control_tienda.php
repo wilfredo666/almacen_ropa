@@ -7,7 +7,7 @@ $ruta=$_SERVER['REQUEST_URI'];
 $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
 $carpeta_sistema=explode("/",$ruta);
-$ruta_absoluta="https://".$dominio."/".$carpeta_sistema[1];
+$ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
 
 //detalles de tienda
 $id_usuario=$_SESSION['id_usuario'];
@@ -91,7 +91,7 @@ $tienda_detalle=mysqli_fetch_row($tienda);
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="<?php echo $ruta_absoluta;?>/cliente.php" class="nav-link">
+                                <a href="<?php echo $ruta_absoluta;?>/cliente.php?pagina=1" class="nav-link">
                                     <i class="nav-icon fas fa-user-tag"></i>
                                     <p>
                                         Clientes
@@ -127,17 +127,8 @@ $tienda_detalle=mysqli_fetch_row($tienda);
                                     </li>
                                 </ul>
                             </li>
-                            <!--                            <li class="nav-item">
-<a href="reportes.php" class="nav-link">
-<i class="nav-icon fas fa-chart-bar"></i>
-<p>
-Reportes
-<span class="right badge badge-danger">1</span>
-</p>
-</a>
-</li>-->
                             <li class="nav-item">
-                                <a href="salir.php" class="nav-link">
+                                <a href="<?php echo $ruta_absoluta;?>/salir.php" class="nav-link">
                                     <i class="nav-icon fas fa-door-open"></i>
                                     <p>
                                         Salir

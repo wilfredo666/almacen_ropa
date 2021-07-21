@@ -51,28 +51,53 @@
 <script src="<?php echo $ruta_absoluta;?>/dist/js/demo.js"></script>
 
 <!-- Modal pantalla completa-->
-<div class="modal fullscreen-modal" id="modal_fs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="modal_fs">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div  id="formulario_fs" class="modal-body">
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!--<div class="modal fullscreen-modal" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialoge" role="document">
         <div class="modal-content">
-
-            <div  id="formulario_fs" class="modal-body">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div  id="formulario_" class="modal-body">
 
             </div>
 
         </div>
     </div>
-</div>
+</div>-->
 
 <!--modal grande-->
 <div class="modal fade bd-example-modal-lg" id="modal_cont" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div id="formulario" class="modal-body">
 
             </div>
             <div id="mensaje_cont" style="display: flex; justify-content: center;">
-                
+
             </div>
 
         </div>
@@ -88,7 +113,7 @@
 
             </div>
             <div id="mensaje_cont_sm" style="display: flex; justify-content: center;">
-                
+
             </div>
 
         </div>

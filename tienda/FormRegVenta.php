@@ -10,6 +10,15 @@ include "../conexion.php";
 ?>
 <script src="../assets/js/tienda.js"></script>
 <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12">
+            <h4>Realizar venta</h4>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
 
     <!-- contenido principal -->
     <section class="content">

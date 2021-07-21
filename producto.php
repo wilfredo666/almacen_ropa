@@ -44,8 +44,8 @@ include "conexion.php";
 
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
-                            $inicio=($_GET["pagina"]-1)*10;//devuelve 0
-                            $res=mysqli_query($conectador,"SELECT * FROM producto limit $inicio,10");
+                            $inicio=($_GET["pagina"]-1)*50;//devuelve 0
+                            $res=mysqli_query($conectador,"SELECT * FROM producto limit $inicio,50");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
