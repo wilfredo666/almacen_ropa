@@ -10,29 +10,32 @@ include "../conexion.php";
 ?>
 <script src="../assets/js/tienda.js"></script>
 <div class="content-wrapper">
-    
+
 
     <!-- contenido principal -->
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="card-body">
+                    <form id="form_consulta_ventas" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-2">
+                                <h4>Ventas</h4>
+                            </div>
 
-                    <div class="row">
-                        <div class="col-4">
-                            <h4>Buscar venta</h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-info btn-circle" disabled><i class="fas fa-search"></i></button>
-                                </div>
-                                <input type="text" name="dat_producto" id="dat_producto"  class="form-control" placeholder="Escriba el nombre del cliente" onkeyup="BuscarVenta();">
+                            <div class="col-3">
+                                <input type="date" name="fecha_inicio" id="fecha_ingreso" class="form-control">
+                            </div>
+                            <div class="col-3">
+                                <input type="date" name="fecha_fin" id="fecha_salida" class="form-control">
+                            </div>
+                            <div class="3">
+                                <button class="btn btn-primary float-right" type="button" onclick="consultar(<?php echo $tienda_detalle[0];?>);">Consultar</button>
+                            </div>
+                            <div class="col-1">
                             </div>
                         </div>
-                        <div class="col-2">
-                        </div>
-                    </div>
+                    </form>
                     <br>
                     <table class="table table-bordered">
                         <thead>                  
@@ -43,7 +46,7 @@ include "../conexion.php";
                                 <td></td>
                             </tr>
                         </thead>
-                        <tbody id="res_bus_venta" class="res_bus_venta">
+                        <tbody id="resp_consulta">
 
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
@@ -53,13 +56,14 @@ include "../conexion.php";
                             {
                             ?>
                             <tr>
-                               
+
                                 <td> <?php echo $f[1] ;?></td>
                                 <td><?php echo  $f[2] ;?></td>
                                 <td><?php echo  $f[3] ;?></td>
                                 <td>
                                     <div class="btn-group">
                                         <button onclick="VerDetalleVenta(<?php echo $f[0]; ?>);" class="btn btn-info btn-circle"><i class="fas fa-eye"></i></button>
+                                        <button onclick="MEliVenta(<?php echo $f[0]; ?>);" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>

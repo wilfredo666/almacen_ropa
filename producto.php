@@ -78,7 +78,6 @@ include "conexion.php";
                     $productosPorPagina=10;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);//devuelve 2,1 redondeado a 3
 
-
                     ?>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">

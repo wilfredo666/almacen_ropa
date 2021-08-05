@@ -243,26 +243,6 @@ function CostoTotal(){
 
 }
 
-/* consular reporte - funcion */
-function consultar(){
-    var formData = new FormData($("#form_consulta")[0]);
-
-    $.ajax({
-        url:host+"tienda/ConsultaSalida.php",
-        type:"POST",
-        data:formData,
-        cache:false,
-        contentType:false,
-        processData:false,
-        success:function(data)
-        {
-            $("#resp_consulta").html(data);
-
-        }
-
-    }
-          )
-}
 
 /* formulario para agregar inventario a tienda desde tienda*/
 function nuevoIngInventario(id_tienda){
@@ -342,9 +322,11 @@ function infoProductoTienda(id_tienda){
 /*agregar item a lista de ventas - lado derecho en "FormRegVenta" */
 var i=0;
 function AgregarCarrito(){
-    var id_stock=$("#id_stock").val();
+    //var id_stock=document.getElementsByName("id_stock");
+    var id_stock =document.querySelector('input[name=id_stock]:checked').value;
     var obj={id_stock:id_stock,
-            i:i};
+             i:i};
+    console.log(id_stock);
     $.ajax(
         {
             type:"POST",
@@ -353,6 +335,7 @@ function AgregarCarrito(){
             success:function(data){
                 $("#carrito").append(data);
                 i=i+1;
+                
             }
         }
     )
@@ -363,7 +346,7 @@ function TotImporte(e){
     var CostoUni=$("#precio_pro"+e).val();
     var CantidadPro=$("#cantidad_pro"+e).val();
     var ImpTotal=parseFloat(CostoUni)*parseFloat(CantidadPro);
-        $("#importe"+e).val(ImpTotal);
+    $("#importe"+e).val(ImpTotal);
     total(i);
 }
 
@@ -414,18 +397,54 @@ function QuitarItem(tr){
 /*ver el detalla de la venta en "ListaVenta"*/
 function VerDetalleVenta(id_venta){
     $('#modal_cont').modal('show');
-    console.log(host);
     var obj="";
     $.ajax({
-         type:"POST",
-            url:host+"VerDetalleVenta.php?id_venta="+id_venta,
-            data:obj,
-            success:function(data){
-                $("#formulario").html(data);
-    }
+        type:"POST",
+        url:host+"VerDetalleVenta.php?id_venta="+id_venta,
+        data:obj,
+        success:function(data){
+            $("#formulario").html(data);
+        }
     })
 }
 
+/*modal eliminar venta*/
+function MEliVenta(id_venta){
+    $('#modal_cont_sm').modal('show');
+    var obj="";
+    $.ajax({
+        type:"POST",
+        url:host+"FormEliVenta.php?id_venta="+id_venta,
+        data:obj,
+        success:function(data){
+            $("#formulario_sm").html(data);
+        }
+    })
+}
+
+/*Elimina venta - funcion*/
+function EliVenta(id_venta){
+    var obj="";
+    $.ajax({
+        type:"POST",
+        url:host+"EliVenta.php?id_venta="+id_venta,
+        data:obj,
+        success:function(){
+            $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>Venta eliminada!!!</center>");
+
+            setTimeout(
+                function(){
+                    $('#modal_cont_sm').modal('hide');
+                },1000);
+
+            setTimeout(
+                function(){
+                    location.reload();
+                },1000);
+        }
+
+    })
+}
 /* vista detallada de producto - modal */
 function DetalleProducto(producto,id_tienda){
     $('#modal_fs').modal('show');
@@ -440,4 +459,41 @@ function DetalleProducto(producto,id_tienda){
             }
         }
     )
+}
+
+/* vista detallada de la historia de venta de un producto - modal */
+function DetalleHistoria(producto,id_tienda){
+    $('#modal_fs').modal('show');
+    var obj="";
+    $.ajax(
+        {
+            type:"POST",
+            url:host+"DetalleHistoria.php?producto="+producto+"&id_tienda="+id_tienda,
+            data:obj,
+            success:function(data){
+                $("#formulario_fs").html(data);
+            }
+        }
+    )
+}
+
+/* consular ventas reporte - funcion */
+function consultar(id_tienda){
+    var formData = new FormData($("#form_consulta_ventas")[0]);
+
+    $.ajax({
+        url:host+"RepVentas.php?id_tienda="+id_tienda,
+        type:"POST",
+        data:formData,
+        cache:false,
+        contentType:false,
+        processData:false,
+        success:function(data)
+        {
+            $("#resp_consulta").html(data);
+
+        }
+
+    }
+          )
 }

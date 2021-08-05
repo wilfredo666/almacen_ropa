@@ -68,21 +68,6 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<!--<div class="modal fullscreen-modal" id="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialoge" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div  id="formulario_" class="modal-body">
-
-            </div>
-
-        </div>
-    </div>
-</div>-->
 
 <!--modal grande-->
 <div class="modal fade bd-example-modal-lg" id="modal_cont" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

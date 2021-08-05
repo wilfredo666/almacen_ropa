@@ -125,6 +125,12 @@ $tienda_detalle=mysqli_fetch_row($tienda);
                                             <p>Registro de ventas</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="<?php echo $ruta_absoluta;?>/tienda/HistoriaVenta.php?pagina=1" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Historia de ventas</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">
