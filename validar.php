@@ -20,16 +20,27 @@ if($filas>0){
     $_SESSION["apellido_pat"]=$filas[5];
     $_SESSION["apellido_mat"]=$filas[6];
     $_SESSION["ci"]=$filas[7];
-    //print_r($_SESSION); <?php print_r($_SESSION);
     
     if($filas[3]=="administrador"){
         header("Location:panel_inicial.php"); 
     }elseif($filas[3]=="cajero"){
-        header("Location:panel_inicial_tienda.php");
+        $cajero_sql=mysqli_query($conexion,"select * from tienda where id_usuario=$filas[0]");
+        $cajero=mysqli_fetch_row($cajero_sql);
+        if($cajero>0){
+            header("Location:panel_inicial_tienda.php");
+        }else{
+            include ("index.html");
+    ?>
+    <h1 class="error">El cajero no tiene tienda asignada!!!</h1>
+    <?php
+        }
     }
 }
 else{
-    echo "Error de autenticacion";
+    include ("index.html");
+    ?>
+    <h1 class="error">Error de autenticacion!!!</h1>
+    <?php
 }
 mysqli_free_result($resultado);
 mysqli_close($conexion);

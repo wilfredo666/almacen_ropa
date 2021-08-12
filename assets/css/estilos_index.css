@@ -1,4 +1,4 @@
-//hoja de estilos para el formulario de login
+/*hoja de estilos para el formulario de login*/
 *{
 	margin:0;
 	padding:0;
@@ -6,10 +6,7 @@
 	box-sizing:border-box;
 }
 body{
-	background-image:url(../imagenes/membretado.jpg);
-	background-size:100%;
-	display:flex;
-	min-height:100vh;
+    padding-top: 80px;
 }
 h2{
 	text-align:center;
@@ -18,7 +15,8 @@ h2{
 }
 form{
 	margin:auto;
-	width:50%;
+    /*margin-top: 50px;*/
+	width:100%;
 	max-width:500px;
 	background:#F3F3F3;
 	opacity:0.8;
@@ -55,6 +53,14 @@ input[type="submit"]:hover{
 input[type="submit"]:active{
 	transform: scale(0.95);
 }
+
+.error{
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+}
+
 @media[max-width:480px]{
 	form{
 		width:95%;

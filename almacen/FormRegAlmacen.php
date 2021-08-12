@@ -7,13 +7,13 @@
         <div class="col">
            <label>Que tipo de ropa almacena?:</label>
            <input type="text" class="form-control" name="descripcion" id="descripcion">
-            <label>Que tallas/medidas usara?:</label>
+<!--            <label>Que tallas/medidas usara?:</label>
             <select name="medida" id="medida" class="form-control">
                <option>Seleccionar</option>
                 <option value="1">2-16</option>
                 <option value="2">P-XXXL</option>
                 <option value="3">36-54</option>
-            </select>
+            </select>-->
         </div>
         <div class="col">
             <label>Persona a cargo:</label>

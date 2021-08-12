@@ -15,8 +15,8 @@
             <br>
             <select name="categoria" id="categoria" class="form-control">
                 <option>Seleccionar categoria</option>
-                <option>Administrador</option>
-                <option>Cajero</option>
+                <option value="administrador">Administrador</option>
+                <option value="cajero">Cajero</option>
             </select>
             <br>
             <input type="password" name="pass" id="pass"  class="form-control" placeholder="Elija y escriba una contraseña"/><br>

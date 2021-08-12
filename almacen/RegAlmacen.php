@@ -8,8 +8,7 @@ $medida=$_POST["medida"];
 mysqli_query($conectador,"insert into almacen(
 direccion,
 id_usuario,
-desc_almacen,
-medida)
-values('$dire','$usu','$des','$medida');");
+desc_almacen)
+values('$dire','$usu','$des');");
 
 ?>
