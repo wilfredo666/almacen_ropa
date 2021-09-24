@@ -1,15 +1,14 @@
 <?php
 session_start();
 
+include "conexion.php";
+
 $usuario=$_POST['usuario'];
 $clave=$_POST['clave'];
 $cat=$_POST['categoria'];
-$conexion=mysqli_connect("localhost","root","","almacen_ropa");
-/*$conexion=mysqli_connect("localhost:3306","marketin_sistemaalmacen","Admin123!","marketin_almacen_ropa");*/
-
 
 $consulta="select * from usuario where nombre_usu='$usuario' and password='$clave' and categoria='$cat'";
-$resultado=mysqli_query($conexion,$consulta);
+$resultado=mysqli_query($conectador,$consulta);
 $filas=mysqli_fetch_row($resultado);
 //prueba de comentario
 if($filas>0){
@@ -24,7 +23,7 @@ if($filas>0){
     if($filas[3]=="administrador"){
         header("Location:panel_inicial.php"); 
     }elseif($filas[3]=="cajero"){
-        $cajero_sql=mysqli_query($conexion,"select * from tienda where id_usuario=$filas[0]");
+        $cajero_sql=mysqli_query($conectador,"select * from tienda where id_usuario=$filas[0]");
         $cajero=mysqli_fetch_row($cajero_sql);
         if($cajero>0){
             header("Location:panel_inicial_tienda.php");
@@ -43,6 +42,6 @@ else{
     <?php
 }
 mysqli_free_result($resultado);
-mysqli_close($conexion);
+mysqli_close($conectador);
 
 ?>

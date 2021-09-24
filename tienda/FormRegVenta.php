@@ -11,13 +11,13 @@ include "../conexion.php";
 <script src="../assets/js/tienda.js"></script>
 <div class="content-wrapper">
     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-12">
-            <h4>Realizar venta</h4>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <h4>Realizar venta</h4>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
     </section>
 
     <!-- contenido principal -->
@@ -25,7 +25,7 @@ include "../conexion.php";
         <div class="container-fluid">
             <form action="" id="form_venta" enctype="multipart/form-data">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-md-6">
                         <label>Producto</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -53,22 +53,19 @@ include "../conexion.php";
                         <div id="mensaje_cont" class="float-right">
                         </div>
                         <input type="button" class="btn btn-success" value="Agregar" onclick="AgregarCarrito();">
-
                     </div>
-                    <div class="col-7">
-                        
+                    <div class="col-md-6">
                         <div class="row">
                             <div class="col-5">
                                 <label>Cliente</label>
                                 <input type="text" name="cliente" id="cliente"  class="form-control">
                             </div>
                             <div class="col-4"></div>
-                            <div class="col">
+                            <div class="col-3">
                                 <br>
-                                <input type="button" class="btn btn-primary" value="Finalizar venta" onclick="FinVenta(<?php echo $tienda_detalle[0];?>);">
+                                <input type="button" class="btn btn-primary" value="Finalizar venta" onclick="FinVenta(<?php echo $tienda_detalle[0];?>);" id="btnFinVenta">
                             </div>
                         </div>
-
                         <table class="table">
                             <thead>
                                 <tr>
@@ -87,14 +84,13 @@ include "../conexion.php";
                                 <td id="total">0</td>
                             </tr>
                         </table>
+                        <p id="cantMsj" class="text-danger"></p>
                     </div>
-
                 </div>
             </form>
         </div>
     </section>
     <!-- final contenido principal -->
-
 </div>
 <?php
 include "../footer.php";

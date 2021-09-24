@@ -46,14 +46,14 @@ $id_almacen=$_GET["id_almacen"];
 
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
-                            $inicio=($_GET["pagina"]-1)*10;
-                            $res=mysqli_query($conectador,"SELECT id_traspaso_tienda, descripcion, talla, color, cantidad, nombre_tienda,  fecha_hora
-FROM traspaso_tienda
+                            $inicio=($_GET["pagina"]-1)*50;
+                            $res=mysqli_query($conectador,"SELECT id_traspaso_tienda, descripcion, talla, color, cantidad, nombre_tienda, fecha_hora
+FROM stock_tienda
 JOIN producto 
-ON producto.id_producto=traspaso_tienda.id_producto
+ON producto.id_producto=stock_tienda.id_producto
 JOIN tienda
-on tienda.id_tienda=traspaso_tienda.id_tienda_destino
-WHERE id_almacen_origen=$id_almacen");
+ON tienda.id_tienda=stock_tienda.id_tienda_destino
+WHERE id_almacen_origen=$id_almacen limit $inicio,50");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
@@ -79,13 +79,11 @@ WHERE id_almacen_origen=$id_almacen");
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from ingreso_almacen where id_almacen=$id_almacen");
+                    $sql=mysqli_query($conectador,"select count(*) as total from stock_tienda where id_almacen_origen=$id_almacen");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);
-                    //var_dump($resultado);
-
 
                     ?>
                     <nav aria-label="Page navigation example">

@@ -24,15 +24,10 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
 
                     <div class="row">
                         <div class="col-4">
-                            <h4>Almacen - <?php echo $almacen[3];?></h4>
+                            <h4>Stock Almacen - <?php echo $almacen[3];?></h4>
                         </div>
                         <div class="col-6">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-info btn-circle" disabled><i class="fas fa-search"></i></button>
-                                </div>
-                                <input type="text" name="txt_bus_traspaso" id="txt_bus_traspaso"  class="form-control" placeholder="Buscar traspaso, escriba el producto" onkeyup="buscarTraspaso(<?php echo $id_almacen;?>);">
-                            </div>
+                            
                         </div>
                         <div class="col-2">
                         </div>
@@ -56,11 +51,10 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
                             $inicio=($_GET["pagina"]-1)*50;
-
                             //colocando su cantidad correspondiente a cada talla para vista simple
 
                             //1.- extrayendo todos los productos
-                            $productos_sql=mysqli_query($conectador,"SELECT DISTINCT descripcion FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen limit $inicio,50");
+                            $productos_sql=mysqli_query($conectador,"SELECT DISTINCT descripcion FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen");
                             while($productos=mysqli_fetch_array($productos_sql))
                             {
                             ?>
@@ -71,12 +65,16 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
                                 //2.- Extrayendo las tallas
                                 $tallas_sql=mysqli_query($conectador,"SELECT DISTINCT talla FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen");
                                 while($tallas=mysqli_fetch_array($tallas_sql)){
-                                    //3.- consulta para extraer las cantidades de dado producto y dada talla
-                                    $productos_cant_sql=mysqli_query($conectador,"SELECT sum(stock) FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen and descripcion='$productos[0]' and talla='$tallas[0]'");
-                                    $productos_cant=mysqli_fetch_row($productos_cant_sql);
-                                    if($productos_cant[0]>0){
-                                        echo "<td>$productos_cant[0]</td>"; 
-                                        $acum=$acum+$productos_cant[0];
+                                    //3.- consulta para extraer las cantidades total de dado producto y dada talla registrados en la tabla "stock_almacen" (porque son ingresos que equivale a una entrada)
+                                    $tot_ingresos_sql=mysqli_query($conectador,"SELECT sum(cantidad) FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen and descripcion='$productos[0]' and talla='$tallas[0]'");
+                                    
+                                    //4.- consulta para extraer las cantidades total de dado producto y dada talla registrados en la tabla "stock_tienda" (porque son un traspaso que equivale a una salida)
+                                   $tot_traspasos_sql=mysqli_query($conectador,"SELECT sum(cantidad) FROM stock_tienda JOIN producto ON producto.id_producto=stock_tienda.id_producto WHERE id_almacen_origen=$id_almacen and descripcion='$productos[0]' and talla='$tallas[0]'"); $tot_ingresos=mysqli_fetch_row($tot_ingresos_sql);
+                                    $tot_traspasos=mysqli_fetch_row($tot_traspasos_sql);
+                                    $productos_cant=$tot_ingresos[0]-$tot_traspasos[0];
+                                    if($productos_cant>0){
+                                        echo "<td>$productos_cant</td>"; 
+                                        $acum=$acum+$productos_cant;
                                     }else{
 
                                         echo "<td>0</td>";
@@ -102,12 +100,11 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from stock_almacen");
+                    $sql=mysqli_query($conectador,"select count(*) as total from stock_almacen where id_almacen=$id_almacen");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);
-                    //var_dump($resultado);
                     ?>
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">

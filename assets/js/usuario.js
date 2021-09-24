@@ -145,8 +145,8 @@ function EliUsuario(id){
             data:obj,
             success:function(data)
             {
-                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>El usuario ha sido eliminado!!!</center>");
-
+                /*$("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>El usuario ha sido eliminado!!!</center>");*/
+$("#mensaje_cont_sm").html(data);
                 setTimeout(
                     function(){
                         $('#modal_cont_sm').modal('hide');

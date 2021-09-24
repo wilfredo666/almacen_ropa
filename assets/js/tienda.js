@@ -28,7 +28,7 @@ function RegTienda(){
     var formData = new FormData($("#form_tienda")[0]);
 
     $.ajax({
-        url:host+"tienda/Regtienda.php",
+        url:host+"tienda/RegTienda.php",
         type:"POST",
         data:formData,
         cache:false,
@@ -78,7 +78,7 @@ function EliTienda(id){
             data:obj,
             success:function(data)
             {
-                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>La tienda ha sido eliminada!!!</center>");
+                $("#mensaje_cont_sm").html(data);
 
                 setTimeout(
                     function(){
@@ -322,11 +322,12 @@ function infoProductoTienda(id_tienda){
 /*agregar item a lista de ventas - lado derecho en "FormRegVenta" */
 var i=0;
 function AgregarCarrito(){
-    //var id_stock=document.getElementsByName("id_stock");
-    var id_stock =document.querySelector('input[name=id_stock]:checked').value;
-    var obj={id_stock:id_stock,
+    var producto =document.querySelector('input[name=id_producto]:checked').value.split("-");
+    var id_producto=producto[0];
+    var stock=producto[1];
+    var obj={id_producto:id_producto,
+             stock:stock,
              i:i};
-    console.log(id_stock);
     $.ajax(
         {
             type:"POST",
@@ -335,7 +336,7 @@ function AgregarCarrito(){
             success:function(data){
                 $("#carrito").append(data);
                 i=i+1;
-                
+
             }
         }
     )
@@ -343,11 +344,20 @@ function AgregarCarrito(){
 
 /*calculo de el importe total en venta*/
 function TotImporte(e){
-    var CostoUni=$("#precio_pro"+e).val();
-    var CantidadPro=$("#cantidad_pro"+e).val();
-    var ImpTotal=parseFloat(CostoUni)*parseFloat(CantidadPro);
-    $("#importe"+e).val(ImpTotal);
-    total(i);
+    var stock_disp=parseFloat($("#stock_disp"+e).val());
+    var CostoUni=parseFloat($("#precio_pro"+e).val());
+    var CantidadPro=parseFloat($("#cantidad_pro"+e).val());
+    if(CantidadPro>stock_disp){
+        $('#cantMsj').html("No puedes vender mas del stock disponible");
+        $('#btnFinVenta').attr('disabled', 'disabled'); 
+    }else{
+        $('#cantMsj').html("");
+        $('#btnFinVenta').removeAttr('disabled');
+        var ImpTotal=CostoUni*CantidadPro;
+        $("#importe"+e).val(ImpTotal);
+        total(i);
+    }
+
 }
 
 /*Calculo del total de venta*/
@@ -374,6 +384,7 @@ function FinVenta(id_tienda){
         processData:false,
         success:function(data)
         {
+            console.log(data);
             $("#mensaje_cont").html("<center class='alert alert-success' style='width:350px;'>Venta registrada!!!</center>");
 
             setTimeout(

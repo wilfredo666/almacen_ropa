@@ -31,6 +31,7 @@ include "../conexion.php";
         </div>
         <div class="col">
             <label>Tienda</label>
+            
             <select name="id_tienda_des" id="id_tienda_des" class="form-control">
                 <option>Seleccionar</option>
                 <?php
@@ -43,7 +44,9 @@ include "../conexion.php";
             </select>
             <br>
             <label>Cantidad</label>
-            <input type="number" name="cantidad_pro" id="cantidad_pro"  class="form-control"/>
+            <input type="number" id="stockPro" hidden=""><!--se adjudica aqui el stock disponible del producto seleccionado - funcion js-->
+            <input type="number" name="cantidad_pro" id="cantidad_pro"  class="form-control" onkeyup="validarCantidad();" />
+            <p id="cantMsj" class="text-danger"></p>
         </div>
 
     </div>
@@ -53,5 +56,5 @@ include "../conexion.php";
             </div>   
 <div class="modal-footer">
     <input class="btn btn-danger" type="button" data-dismiss="modal" value="Cancelar">
-    <input class="btn btn-success" type="button" value="Guardar" onclick="RegTraspasoTienda(<?php echo $id_almacen;?>);">
+    <input class="btn btn-success" type="button" id="guardarReg" value="Guardar" onclick="RegTraspasoTienda(<?php echo $id_almacen;?>);">
 </div>    

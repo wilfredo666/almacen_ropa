@@ -71,10 +71,11 @@ include "conexion.php";
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from cliente");
+                    $inicio=($_GET["pagina"]-1)*50;
+                    $sql=mysqli_query($conectador,"select count(*) as total from cliente limit $inicio,50");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $itemsPorPagina=10;
+                    $itemsPorPagina=50;
                     $total=ceil($totalRegistros[0]/$itemsPorPagina);
                     ?>
                     <nav aria-label="Page navigation example">

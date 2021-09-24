@@ -1,21 +1,64 @@
-dominio y cpanel:
-https://marketingonlineoficial.com/
-https://marketingonlineoficial.com/cpanel
-user: marketingonlineo
-password: Bolivia123jorge
+---ftp---
+servidor ftp: 45.87.81.14
+usuario: u248590315
+password: Admin123!
+puerto: 21
+path:/public_html
 
+---hostinger----
+modafashion.bo@gmail.com
+Jorge123%$
+
+accedo bd de hostinger:
+usuario: u248590315_almacen
+bd: u248590315_almacen_ropa
+password: Admin321!
+
+almacen_ropa
+------------
 acceso a sistema
 usuario: admin
 pass: password
 categoria: administrador
 
----ftp---
-servidor: ftp.marketingonlineoficial.com
-usuario: administrador@marketingonlineoficial.com
-password: Admin123!
-puerto: 21
-path:/public_html/sistema_almacen
+almacen_ropa (host externo)
+---------------------------
+-vendedor
+seller
+password
+-administrador
+admin
+password
 
+Base de datos:
+mysql -h 45.87.81.0 -u u248590315_almacen -p Admin321!
+o
+https://auth-db365.hostinger.com/index.php?db=u248590315_almacen_ropa
+u248590315_almacen 
+Admin321!
+
+***** a resolver*****
+no se puede eliminar productos si esta relacionado con:
+-registro de traspasos a tienda
+-registro de ingresos
+-quitar del navbar del el icono para personalizar el mismo y cambiarlo por la expancion de pantalla full
+
+no se puede eliminar usuarios si esta relacionado con:
+-tienda
+
+-debe elejirse si o si un usuario de tipo cajero al crear tienda
+-restringir la cantida que se puede traspasar a almacen en base al stock del almacen
+-hacer que el stock del almacen vuelva a aumentar si se quitan el traspaso a otro almacen
+-no se pueden eliminar los traspasos a las tiendas
+-poner "registro de ingresos en la vista listaIngresos.php"
+-poner "stock - (almacen) en la vista stockAlmacen.php"
+*****
+-restrict: que no se puede borrar o catualiza un registro si este esta referenciado en otra tabla (la tabla con la llave foreana), pero si no lo esta, entonces si se podra borrar o actualizar
+-cascade: que se borrara o actualizar todos los registros de la tabla dependiente (la tabla con la llave foreana) que contengan el valor de una clave primaria en la tabla referenciada
+-set null: Establece a NULL el valor de la clave secundaria (la tabla con la llave foreana) cuando se elimina o actualiza el registro en la tabla principal
+-no action: En MySQL funciona igual que RESTRICT.
+
+(post.-) las llaves referenciadas son las primarias
 
 /////// al subir en la nube /////
 cambiar a https en "panel_control.php" y "panel_control_tienda.php"
@@ -24,14 +67,6 @@ cambiar la conexion a la bd en "validar.php" y "conexion.php"
 ---git---
 https://github.com/wilfredo666/almacen_ropa.git
 
-base de datos:
-marketin_almacen_ropa
-usuario base de datos:
-marketin_sistemaalmacen
-Admin123!
-host base de datos:
-localhost:3306
-$conexion=mysqli_connect("portalanimal.site","sistemaalmacen","Admin123!","almacen_ropa");
 
 consultas:
 -modo 1 para unir datos:
@@ -40,15 +75,6 @@ SELECT desc_almacen, descripcion, talla, stock FROM stock_almacen st, producto p
 **************
 cuando no inicia en hosting con la vista adecuada css, entonces quiza es por al peticion http --> htpps
 **************
-
---------***----
-Pendientes:
-mejorar lo de las tallas
-incorporar buscador a stockAlmacen.php
-- poner carrito en productos para agregar color, talla
-- para probar hacer registro de todas tallas, y colores
-- definir solo minisculas al registrar producto (color, descripcion)
-- sumar todos los que tengan la misma talla para la vista simple
 
 --------***----
 
@@ -97,32 +123,3 @@ function AgregarCarrito(){
     )
 }
 
-/*calculo de el importe total en venta*/
-function TotImporte(){
-    var CostoUni=$("#precio_pro").val();
-    var CantidadPro=$("#cantidad_pro").val();
-    var ImpTotal=parseFloat(CostoUni)*parseFloat(CantidadPro);
-        $("#importe").val(ImpTotal);
-}
-
-------
-Soluciones a vista detallada
-opcion 1)
-1.- en registro de producto, agregar la opcion para elejir en que tallas estara disponible
-2.- Crear alguna validacion para que no pueda agregarse en otro almacen que no maneje esas tallas
-3.- Regsitrar dicho producto con todas sus tallas
-4.- Agregar stock 0 en todas las tallas de manera inicial
-
-opcion2)
-SELECT descripcion, talla, precio, color, stock FROM producto
-JOIN stock_almacen
-ON producto.id_producto=stock_almacen.id_producto
-ORDER BY talla
-------
-consultas:
------evitar datos repetidos----
-SELECT DISTINCT talla from producto
----sacar datos de dado un almacen---
-SELECT descripcion, talla, precio, color, stock FROM producto JOIN stock_almacen ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=2
----extraer solo las tallas de dado un almacen---
-SELECT DISTINCT talla FROM producto JOIN stock_almacen ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=2

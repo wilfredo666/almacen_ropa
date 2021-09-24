@@ -6,7 +6,7 @@ if($_SESSION["categoria"]=="administrador"){
     include "../panel_control_tienda.php";
 }
 include "../conexion.php";
-$i=1;
+$num=1;
 $acum=0;
 //consulta para extraer las tallas de dada tienda en venta
 $tallas_sql=mysqli_query($conectador,"SELECT DISTINCT talla FROM detalle_venta
@@ -57,9 +57,6 @@ $tallas_cant=mysqli_num_rows($tallas_sql);
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
                             $inicio=($_GET["pagina"]-1)*50;
-
-                            //colocando su cantidad correspondiente a cada talla para vista simple
-
                             //1.- extrayendo todos los productos
                             $res=mysqli_query($conectador,"SELECT DISTINCT descripcion FROM detalle_venta
 JOIN producto ON producto.id_producto=detalle_venta.id_producto
@@ -69,7 +66,7 @@ where id_tienda=$tienda_detalle[0] limit $inicio,50");
                             {
                             ?>
                             <tr>
-                                <td><?php echo $i;?></td>
+                                <td><?php echo $num;?></td>
                                 <td><?php echo  $f[0] ;?></td>
                                 <?php
                                 //2.- Extrayendo las tallas
@@ -104,7 +101,7 @@ where id_tienda=$tienda_detalle[0] and descripcion='$f[0]' and talla='$tallas[0]
                             </tr>
                             <?php
                                 $acum=0;
-                                $i=1;
+                                $num=$num+1;
                             }
                             ?>
                         </tbody>
@@ -113,10 +110,10 @@ where id_tienda=$tienda_detalle[0] and descripcion='$f[0]' and talla='$tallas[0]
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from producto");
+                    $sql=mysqli_query($conectador,"select count(*) as total from detalle_venta");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);
                     //var_dump($resultado);
 

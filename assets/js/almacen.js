@@ -77,7 +77,7 @@ function EliAlmacen(id){
             data:obj,
             success:function(data)
             {
-                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>El Almacen ha sido eliminado!!!</center>");
+                $("#mensaje_cont_sm").html(data);
 
                 setTimeout(
                     function(){
@@ -507,4 +507,20 @@ function VerProducto(producto,id_almacen){
             }
         }
     )
+}
+
+/*validar cantidad*/
+function validarCantidad(){
+    var cantidad=parseFloat($('#stockPro').val());
+    var cantP=parseFloat($('#cantidad_pro').val());
+    if(cantP>cantidad){
+       $('#cantMsj').html("No puedes exeder la cantidad disponible");
+        $('#guardarReg').attr('disabled', 'disabled'); 
+       }else{
+           $('#cantMsj').html("");
+           $('#guardarReg').removeAttr('disabled');
+       }
+}
+function StockProducto(stPro){
+    $('#stockPro').val(stPro);
 }

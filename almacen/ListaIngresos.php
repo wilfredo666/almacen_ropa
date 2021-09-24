@@ -15,7 +15,7 @@ $id_almacen=$_GET["id_almacen"];
 
                     <div class="row">
                         <div class="col-4">
-                            <h4>Ingresos</h4>
+                            <h4>Registro de Ingresos</h4>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
@@ -46,11 +46,8 @@ $id_almacen=$_GET["id_almacen"];
 
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
-                            $inicio=($_GET["pagina"]-1)*10;
-                            $res=mysqli_query($conectador,"SELECT descripcion, categoria, talla, precio, color, cantidad, fecha_hora, id_ingreso
-FROM ingreso_almacen
-JOIN producto
-WHERE producto.id_producto=ingreso_almacen.id_producto and id_almacen=$id_almacen limit $inicio,10");
+                            $inicio=($_GET["pagina"]-1)*50;
+                            $res=mysqli_query($conectador,"SELECT descripcion, categoria, talla, precio, color, cantidad, fecha_hora, id_ingreso FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto where id_almacen=$id_almacen limit $inicio,50");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
@@ -77,10 +74,10 @@ WHERE producto.id_producto=ingreso_almacen.id_producto and id_almacen=$id_almace
                     <!--paginacion-->
                     <?php
                     //obtener el total de registros
-                    $sql=mysqli_query($conectador,"select count(*) as total from ingreso_almacen where id_almacen=$id_almacen");
+                    $sql=mysqli_query($conectador,"select count(*) as total from stock_almacen where id_almacen=$id_almacen");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);
 
                     ?>

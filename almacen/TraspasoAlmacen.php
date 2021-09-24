@@ -46,14 +46,14 @@ $id_almacen=$_GET["id_almacen"];
 
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
-                            $inicio=($_GET["pagina"]-1)*10;
+                            $inicio=($_GET["pagina"]-1)*50;
                             $res=mysqli_query($conectador,"SELECT id_traspaso, descripcion, talla, color, desc_almacen, cantidad, fecha_hora
 FROM traspaso_almacen
 JOIN producto 
 ON producto.id_producto=traspaso_almacen.id_producto
 JOIN almacen
 on almacen.id_almacen=traspaso_almacen.id_almacen_destino
-WHERE id_almacen_origen=$id_almacen");
+WHERE id_almacen_origen=$id_almacen limit $inicio,50");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
@@ -79,13 +79,11 @@ WHERE id_almacen_origen=$id_almacen");
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from ingreso_almacen where id_almacen=$id_almacen");
+                    $sql=mysqli_query($conectador,"select count(*) as total from traspaso_almacen where id_almacen_origen=$id_almacen");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);
-                    //var_dump($resultado);
-
 
                     ?>
                     <nav aria-label="Page navigation example">

@@ -76,7 +76,8 @@ function EliProducto(id){
             data:obj,
             success:function(data)
             {
-                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>El producto ha sido eliminado!!!</center>");
+                $("#mensaje_cont_sm").html("<center class='alert alert-success' style='width:350px;'>Producto!!!</center>");
+                /*$("#mensaje_cont_sm").html(data);*/
 
                 setTimeout(
                     function(){

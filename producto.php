@@ -72,10 +72,10 @@ include "conexion.php";
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from producto");
+                    $sql=mysqli_query($conectador,"select count(*) as total from producto");//143
                     $totalRegistros=mysqli_fetch_row($sql);//devuelve 21
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);//devuelve 2,1 redondeado a 3
 
                     ?>

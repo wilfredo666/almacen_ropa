@@ -51,15 +51,18 @@ include "../conexion.php";
                             <?php
                             //obtener por get el inicio y multiplicarlo por la cantidad de registros que queremos que se vea
                             $inicio=($_GET["pagina"]-1)*10;
-                            $res=mysqli_query($conectador,"select id_venta, id_cliente, fecha_hora, total_venta FROM venta WHERE id_tienda=$tienda_detalle[0]");
+                            $res=mysqli_query($conectador,"select venta.id_venta, cliente, fecha_hora, sum(importe) FROM venta
+JOIN detalle_venta
+ON detalle_venta.id_venta=venta.id_venta
+WHERE id_tienda=$tienda_detalle[0] limit $inicio,50");
                             while($f=mysqli_fetch_array($res))
                             {
                             ?>
                             <tr>
-
-                                <td> <?php echo $f[1] ;?></td>
-                                <td><?php echo  $f[2] ;?></td>
+                                <td><?php echo  $f[1] ;?></td>
+                                <td> <?php echo $f[2] ;?></td>
                                 <td><?php echo  $f[3] ;?></td>
+
                                 <td>
                                     <div class="btn-group">
                                         <button onclick="VerDetalleVenta(<?php echo $f[0]; ?>);" class="btn btn-info btn-circle"><i class="fas fa-eye"></i></button>
@@ -76,13 +79,11 @@ include "../conexion.php";
                     <!--paginacion-->
                     <?php
                     //obtener el total de filas
-                    $sql=mysqli_query($conectador,"select count(*) as total from venta");
+                    $sql=mysqli_query($conectador,"select count(*) as total from venta where id_tienda=$tienda_detalle[0]");
                     $totalRegistros=mysqli_fetch_array($sql);
 
-                    $productosPorPagina=10;
+                    $productosPorPagina=50;
                     $total=ceil($totalRegistros[0]/$productosPorPagina);
-                    //var_dump($resultado);
-
 
                     ?>
                     <nav aria-label="Page navigation example">

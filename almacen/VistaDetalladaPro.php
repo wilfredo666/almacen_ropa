@@ -27,7 +27,7 @@ $acum=0;
         <!--extrayendo todos los colores del producto dado-->
         <?php
         $color_sql=mysqli_query($conectador, "SELECT DISTINCT color FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen AND descripcion='$producto'");
-        
+
         $cant_colores=mysqli_num_rows($color_sql)+1;
         ?>
         <tr>
@@ -41,12 +41,17 @@ $acum=0;
             //extrayendo todas las tallas
             $tallas_sql=mysqli_query($conectador,"SELECT DISTINCT talla FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen");
             while($tallas=mysqli_fetch_array($tallas_sql)){
-                //comparando si tiene dicha stock en dicha talla y dado color
-                $stock_sql=mysqli_query($conectador,"SELECT stock FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen AND descripcion='$producto' and color='$color[0]' and talla=$tallas[0]");
-                $stock=mysqli_fetch_row($stock_sql);
+                //obteniendo el total de ingresos
+                $tot_ingresos_sql=mysqli_query($conectador,"SELECT sum(cantidad) FROM stock_almacen JOIN producto ON producto.id_producto=stock_almacen.id_producto WHERE id_almacen=$id_almacen AND descripcion='$producto' and color='$color[0]' and talla=$tallas[0]");
+                //obteniendo el total de traspasos
+                $tot_traspasos_sql=mysqli_query($conectador,"SELECT sum(cantidad) FROM stock_tienda JOIN producto ON producto.id_producto=stock_tienda.id_producto WHERE id_almacen_origen=$id_almacen AND descripcion='$producto' and color='$color[0]' and talla=$tallas[0]");
+                $tot_ingresos=mysqli_fetch_row($tot_ingresos_sql);
+                $tot_traspasos=mysqli_fetch_row($tot_traspasos_sql);
+                $stock=$tot_ingresos[0]-$tot_traspasos[0];
+                //comparando si tiene stock en dicha talla y dado color
                 if($stock>0){
-                    echo "<td>$stock[0]</td>";
-                    $acum=$acum+$stock[0];
+                    echo "<td>$stock</td>";
+                    $acum=$acum+$stock;
                 }else{
                     echo "<td>0</td>";
                 }

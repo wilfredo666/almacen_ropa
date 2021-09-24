@@ -6,8 +6,8 @@ $ruta=$_SERVER['REQUEST_URI'];
 //dominio
 $dominio=$_SERVER['HTTP_HOST'];
 //delimitando dominio
-$carpeta_sistema=explode("/",$ruta);
-$ruta_absoluta="http://".$dominio."/".$carpeta_sistema[1];
+//$carpeta_sistema=explode("/",$ruta);
+$ruta_absoluta="http://".$dominio."/almacen_ropa";
 
 //detalles de tienda
 $id_usuario=$_SESSION['id_usuario'];
